@@ -1,0 +1,28 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/non-blocking-ux-resolver-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/non-blocking-ux-resolver-e2e/cypress.json",
+        "devServerTarget": "non-blocking-ux-resolver:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "non-blocking-ux-resolver:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/non-blocking-ux-resolver-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["non-blocking-ux-resolver"]
+}
