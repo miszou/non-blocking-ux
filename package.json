@@ -1,0 +1,26 @@
+{
+  "name": "non-blocking-ux",
+  "version": "1.0.0",
+  "description": "Example apps for talk @angular.cologne",
+  "dependencies": {
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/miszou/non-blocking-ux.git"
+  },
+  "keywords": [
+    "angular",
+    "nx",
+    "UX"
+  ],
+  "author": "Maik Fischer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/miszou/non-blocking-ux/issues"
+  },
+  "homepage": "https://github.com/miszou/non-blocking-ux#readme"
+}
