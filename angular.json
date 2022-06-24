@@ -3,6 +3,8 @@
   "version": 2,
   "projects": {
     "non-blocking-ux-resolver": "apps/non-blocking-ux-resolver",
-    "non-blocking-ux-resolver-e2e": "apps/non-blocking-ux-resolver-e2e"
+    "non-blocking-ux-resolver-e2e": "apps/non-blocking-ux-resolver-e2e",
+    "shared": "libs/shared",
+    "tailwind-preset": "libs/tailwind-preset"
   }
 }
