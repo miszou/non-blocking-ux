@@ -1,24 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { EMPTY, Observable, map, pluck } from 'rxjs';
-
-import { ActivatedRoute } from '@angular/router';
-import { Card } from './models/card.model';
+import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { TimerService } from '@angular-cologne/shared';
 
 @Component({
   selector: 'angular-cologne-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'non-blocking-ux-resolver';
-  cards$: Observable<Card[]> = EMPTY;
 
-  constructor(private activatedRoute: ActivatedRoute) {}
+  timer$: Observable<number>;
 
-  ngOnInit() {
-    this.cards$ = this.activatedRoute.data.pipe(
-      pluck('config'),
-      map((config) => config?.items)
-    );
+  constructor(private timerService: TimerService) {
+    this.timer$ = this.timerService.selectTimer();
+  }
+
+  resetCounter() {
+    this.timerService.clear();
   }
 }

@@ -1,0 +1,13 @@
+<div class="card-list">
+  <ng-container *ngIf="cards$ | async as cards; else loadingTemplate">
+    <ng-container *ngFor="let card of cards">
+      <angular-cologne-card [imageUrl]="card.imageUrl" [title]="card.title"></angular-cologne-card>
+    </ng-container>
+  </ng-container>
+
+  <ng-template #loadingTemplate>
+    <ng-container *ngFor="let card of placeHolderCards">
+      <angular-cologne-card-skeleton></angular-cologne-card-skeleton>
+    </ng-container>
+  </ng-template>
+</div>

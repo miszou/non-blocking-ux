@@ -1,8 +1,12 @@
-<div class="header w-auto flex justify-items-center gap-s px-m py-s bg-gray-900">
-  <div class="flex">
-    <img class="h-xl" src="assets/angularcgn.png" alt="Angular Cologne">
-  </div>
+<div class="header w-full flex justify-items-center gap-s px-m py-s bg-gray-900 fixed z-10 drop-shadow-md">
+  <a [routerLink]="['/']"><img class="h-xl" src="assets/angularcgn.png" alt="Angular Cologne"></a>
   <div class="flex flex-auto items-center text-white">
     <h3 class="text-2xl">{{title}}</h3>
+  </div>
+  <div class="flex items-center text-white">
+    <ul class="flex space-x-8">
+      <li><a class="uppercase" [routerLink]="['resolve']" routerLinkActive="text-green-200">Resolver Example</a></li>
+      <li><a class="uppercase" [routerLink]="['reactive']" routerLinkActive="text-green-200">Reactive Example</a></li>
+    </ul>
   </div>
 </div>

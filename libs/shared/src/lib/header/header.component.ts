@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  title = 'Angular Cologne';
+  title = `angular.cologne | Do's and Dont's for Non-Blocking UIs`;
 }

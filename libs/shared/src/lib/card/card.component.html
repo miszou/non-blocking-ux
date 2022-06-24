@@ -1,15 +1,12 @@
-<div class="card mat-typography u-box-shadow">
-  <div class="card__image">
-    <img [src]="imageUrl" [alt]="title" />
-  </div>
-  <div class="card__body">
-    <div class="card__content">
-      <h3 class="card__company-name l-flex l-flex-column l-flex-justify-center l-flex-align-center">
+<div class="card drop-shadow-lg rounded-lg w-72 h-96 border-2 mx-auto bg-white">
+  <div class="flex flex-col items-center h-full space-x-5">
+    <div class="card__image flex h-full bg-green-500">
+      <img [src]="imageUrl" [alt]="title" />
+    </div>
+    <div class="card__body flex flex-col justify-space-between h-auto text-center">
+      <h3 class="card__title flex flex-col justify-center align-center text-xl mt-4">
         {{ title }}
       </h3>
     </div>
-  </div>
-  <div class="card__footer mat-caption l-flex l-flex-align-center">
-    FOOTER
   </div>
 </div>
