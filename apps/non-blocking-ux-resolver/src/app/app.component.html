@@ -1,9 +1,12 @@
 <angular-cologne-header></angular-cologne-header>
 <div class="flex flex-col min-h-full bg-slate-100 pt-24">
   <div class="container h-auto mx-auto">
-    Time passed: <span>{{timer$ | async | date: 'ss:SS'}} Seconds</span>
-    <button class="rounded-md text-white hover:bg-green-700 bg-green-600 px-4 py-1"
-            (click)="resetCounter()">Clear</button>
+    <div class="flex justify-center space-x-1 mb-4 bg-slate-300 py-2">
+      <label>Loading Time:</label
+      ><angular-cologne-stop-watch
+        [config]="{ showReset: true }"
+      ></angular-cologne-stop-watch>
+    </div>
     <router-outlet></router-outlet>
   </div>
 </div>

@@ -22,14 +22,15 @@ export class ConfigService {
   constructor(private http: HttpClient, private timerService: TimerService) {}
 
   getConfig(params?: HttpParams): Observable<Config | HttpErrorResponse> {
-    this.timerService.startCounting();
+    this.timerService.reset();
+    this.timerService.start();
     params =
       params ?? new HttpParams().append('limit', 6).append('offset', 100);
 
     return this.http.get<User[]>(`${API_URL}/users`, { params }).pipe(
       catchError((error) => throwError(() => error)),
       map((response) => ({ items: this.mapToCards(response) })),
-      finalize(() => this.timerService.stopCounting())
+      finalize(() => this.timerService.pause())
     );
   }
 

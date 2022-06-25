@@ -17,6 +17,6 @@ export class AppComponent {
   }
 
   resetCounter() {
-    this.timerService.clear();
+    this.timerService.reset();
   }
 }

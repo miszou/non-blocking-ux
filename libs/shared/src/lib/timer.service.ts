@@ -1,63 +1,58 @@
 import {
-  BehaviorSubject,
-  NEVER,
   Observable,
   animationFrameScheduler,
   interval,
   map,
   merge,
-  of,
   scan,
   switchMap,
-  tap,
+  startWith,
+  Subject,
+  takeUntil,
 } from 'rxjs';
 
 import { Injectable } from '@angular/core';
-import { animation } from '@angular/animations';
-
-interface State {
-  counting: boolean;
-  value: number;
-}
 
 @Injectable({
   providedIn: 'root',
 })
 export class TimerService {
-  private readonly counting$ = new BehaviorSubject<boolean>(false);
-  private readonly count$ = new BehaviorSubject<number>(0);
-  private readonly currentCount$ = new BehaviorSubject<number>(0);
+  start$ = new Subject<void>();
+  stop$ = new Subject<void>();
+  reset$ = new Subject<void>();
+  stopWatch$: Observable<number>;
 
-  private readonly events$ = merge(
-    this.counting$.pipe(map((counting) => ({ counting }))),
-    this.count$.pipe(map((value) => ({ value })))
+  private stopOrReset$ = merge(this.stop$, this.reset$);
+  private paused$ = interval(10, animationFrameScheduler).pipe(takeUntil(this.stopOrReset$));
+  private countOrReset$ = merge(
+    this.paused$.pipe(map(() => (val: number) => val + 1)),
+    this.reset$.pipe(map(() => () => this.initCount))
   );
 
-  stopWatch$ = this.events$.pipe(
-    scan((state: State, curr): State => ({ ...state, ...curr }), {} as State),
-    switchMap((state: State) =>
-      state.counting
-        ? interval(1, animationFrameScheduler).pipe(
-            tap(() => (state.value = state.value + 1))
-          )
-        : NEVER
-    )
-  );
+  private initCount = 0;
 
-  startCounting() {
-    this.counting$.next(true);
+  constructor() {
+    this.stopWatch$ = this.start$.pipe(
+      switchMap(() => this.countOrReset$),
+      startWith(() => this.initCount),
+      scan((acc, curr) => curr(acc), this.initCount),
+      map((value) => value * 10)
+    );
   }
 
-  stopCounting() {
-    this.counting$.next(false);
+  start() {
+    this.start$.next();
   }
 
-  selectTimer(): Observable<number> {
+  pause() {
+    this.stop$.next();
+  }
+
+  reset() {
+    this.reset$.next();
+  }
+
+  selectTimer() {
     return this.stopWatch$;
-  }
-
-  clear() {
-    this.counting$.next(false);
-    this.count$.next(0);
   }
 }
