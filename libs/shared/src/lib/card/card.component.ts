@@ -9,4 +9,5 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 export class CardComponent {
   @Input() title = 'Foo';
   @Input() imageUrl = 'https://placekitten.com/300/200';
+  @Input() content = '';
 }

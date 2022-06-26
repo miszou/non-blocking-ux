@@ -8,7 +8,7 @@ import { Observable, delay } from 'rxjs';
 
 import { Injectable } from '@angular/core';
 
-const DELAY = 5000;
+const DELAY = 2000;
 
 @Injectable()
 export class DelayInterceptor implements HttpInterceptor {

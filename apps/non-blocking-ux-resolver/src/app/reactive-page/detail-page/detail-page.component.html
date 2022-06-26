@@ -1,0 +1,17 @@
+<article class="border-2 border-slate-400 h-96 p-4">
+  <ng-container *ngIf="post$ | async as post; else loading">
+    <div class="flex flex-col space-y-8">
+      <h1 class="text-4xl capitalize">{{post?.['title']}}</h1>
+      <p class="">{{post?.['body']}}</p>
+    </div>
+  </ng-container>
+
+  <ng-template #loading>
+    <div class="flex flex-col animate-pulse h-screen space-y-8">
+      <div class="w-3/4 h-12 bg-gray-300"></div>
+      <div class="flex flex-col space-y-3">
+        <div class="w-full h-6 bg-gray-300"></div>
+      </div>
+    </div>
+  </ng-template>
+</article>

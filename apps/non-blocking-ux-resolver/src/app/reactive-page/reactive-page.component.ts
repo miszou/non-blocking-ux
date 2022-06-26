@@ -1,9 +1,8 @@
-import { Observable, map } from 'rxjs';
+import { ConfigService, Entity } from '../services/config.service';
+import { Observable, switchMap } from 'rxjs';
 
-import { Card } from '../models/card.model';
+import { ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
-import { Config } from '../models/config.model';
-import { ConfigService } from '../services/config.service';
 
 @Component({
   selector: 'angular-cologne-reactive-page',
@@ -11,12 +10,15 @@ import { ConfigService } from '../services/config.service';
   styleUrls: ['./reactive-page.component.scss'],
 })
 export class ReactivePageComponent {
-  cards$: Observable<Card[]>;
+  cards$: Observable<Entity[]>;
   placeHolderCards = new Array(15);
 
-  constructor(private configService: ConfigService) {
-    this.cards$ = this.configService
-      .getConfig()
-      .pipe(map((config) => (config as Config)?.items ?? null));
+  constructor(
+    private configService: ConfigService,
+    private activatedRoute: ActivatedRoute
+  ) {
+    this.cards$ = this.activatedRoute.queryParams.pipe(
+      switchMap((params) => this.configService.getPosts(params))
+    );
   }
 }

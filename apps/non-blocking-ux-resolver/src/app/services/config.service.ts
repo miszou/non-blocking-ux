@@ -1,17 +1,12 @@
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpParams,
-} from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, catchError, finalize, map, throwError } from 'rxjs';
 
-import { Card } from '../models/card.model';
-import { Config } from '../models/config.model';
 import { Injectable } from '@angular/core';
+import { Params } from '@angular/router';
 import { TimerService } from '@angular-cologne/shared';
 
-const API_URL = 'https://jsonplaceholder.typicode.com';
-interface User {
+const API_URL = 'http://localhost:3000/api';
+export interface Entity {
   [key: string]: string;
 }
 
@@ -21,23 +16,37 @@ interface User {
 export class ConfigService {
   constructor(private http: HttpClient, private timerService: TimerService) {}
 
-  getConfig(params?: HttpParams): Observable<Config | HttpErrorResponse> {
+  getPosts(params?: Params): Observable<Entity[]> {
     this.timerService.reset();
     this.timerService.start();
-    params =
-      params ?? new HttpParams().append('limit', 6).append('offset', 100);
+    params = new HttpParams(params).append('limit', 15);
 
-    return this.http.get<User[]>(`${API_URL}/users`, { params }).pipe(
+    return this.http
+      .get<{ users: Entity[] }>(`${API_URL}/users`, { params })
+      .pipe(
+        catchError((error) => throwError(() => error)),
+        map((response) => response.users),
+        finalize(() => this.timerService.pause())
+      );
+  }
+
+  getPostById(id: string): Observable<Entity> {
+    this.timerService.reset();
+    this.timerService.start();
+
+    return this.http.get<Entity>(`${API_URL}/users/${id}`).pipe(
       catchError((error) => throwError(() => error)),
-      map((response) => ({ items: this.mapToCards(response) })),
       finalize(() => this.timerService.pause())
     );
   }
 
-  private mapToCards(data: User[]): Card[] {
-    return data.map((item) => ({
-      title: item['name'],
-      imageUrl: 'https://placekitten.com/300/200',
-    }));
-  }
+  private randomColor = () => {
+    let color = '';
+    for (let i = 0; i < 6; i++) {
+      const random = Math.random();
+      const bit = (random * 16) | 0;
+      color += bit.toString(16);
+    }
+    return color;
+  };
 }

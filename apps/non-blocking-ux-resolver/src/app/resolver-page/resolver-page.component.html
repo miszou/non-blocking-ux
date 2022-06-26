@@ -1,7 +1,10 @@
 <div class="card-list">
   <ng-container *ngIf="cards; else loadingTemplate">
     <ng-container *ngFor="let card of cards">
-      <angular-cologne-card [imageUrl]="card.imageUrl" [title]="card.title"></angular-cologne-card>
+      <a [routerLink]="[card['userId']]">
+        <angular-cologne-card [title]="card['title']" [content]="card['body']" [imageUrl]="card['imageUrl']">
+        </angular-cologne-card>
+      </a>
     </ng-container>
   </ng-container>
 
@@ -10,4 +13,6 @@
       <angular-cologne-card-skeleton></angular-cologne-card-skeleton>
     </ng-container>
   </ng-template>
+
+  <router-outlet></router-outlet>
 </div>

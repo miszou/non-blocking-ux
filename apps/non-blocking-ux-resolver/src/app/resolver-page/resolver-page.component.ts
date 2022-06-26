@@ -1,6 +1,6 @@
 import { ActivatedRoute } from '@angular/router';
-import { Card } from '../models/card.model';
 import { Component } from '@angular/core';
+import { Entity } from '../services/config.service';
 import { pluck } from 'rxjs';
 
 @Component({
@@ -9,12 +9,12 @@ import { pluck } from 'rxjs';
   styleUrls: ['./resolver-page.component.scss'],
 })
 export class ResolverPageComponent {
-  cards: Card[] = [];
+  cards: Entity[] = [];
   placeholderCards = new Array(15);
 
   constructor(private activatedRoute: ActivatedRoute) {
     this.activatedRoute.data
       .pipe(pluck('config'))
-      .subscribe((config) => (this.cards = config.items ?? null));
+      .subscribe((config) => (this.cards = config ?? null));
   }
 }

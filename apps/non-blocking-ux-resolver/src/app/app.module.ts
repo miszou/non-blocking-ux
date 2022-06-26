@@ -6,20 +6,21 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ConfigResolver } from './services/config-resolver.service';
 import { DelayInterceptor } from './services/delay.interceptor';
 import { NgModule } from '@angular/core';
+import { ReactiveDetailPageComponent } from './reactive-page/detail-page/detail-page.component';
 import { ReactivePageComponent } from './reactive-page/reactive-page.component';
+import { ResolverDetailPageComponent } from './resolver-page/detail-page/detail-page.component';
 import { ResolverPageComponent } from './resolver-page/resolver-page.component';
-import { RouterModule } from '@angular/router';
 import { SharedModule } from '@angular-cologne/shared';
 
 @NgModule({
-  declarations: [AppComponent, ResolverPageComponent, ReactivePageComponent],
-  imports: [
-    AppRoutingModule,
-    BrowserModule,
-    RouterModule,
-    HttpClientModule,
-    SharedModule,
+  declarations: [
+    AppComponent,
+    ResolverPageComponent,
+    ReactivePageComponent,
+    ResolverDetailPageComponent,
+    ReactiveDetailPageComponent,
   ],
+  imports: [AppRoutingModule, BrowserModule, HttpClientModule, SharedModule],
   bootstrap: [AppComponent],
   providers: [
     ConfigResolver,
