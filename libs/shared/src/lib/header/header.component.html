@@ -1,7 +1,26 @@
-<div class="header w-full py-s bg-gray-900 fixed z-10 drop-shadow-md">
-  <div class="container flex justify-items-center gap-s mx-auto">
+<div class="header w-full bg-gray-900 fixed z-10 drop-shadow-md">
+  <div class="container flex justify-items-center gap-s mx-auto py-s">
     <a [routerLink]="['/']"><img class="h-xl" src="assets/angularcgn.png" alt="Angular Cologne" /></a>
-    <div class="flex flex-auto items-center text-white">
+    <div class="flex items-center justify-between grow text-white">
       <h3 class="text-2xl">{{ title }}</h3>
+      <ul class="flex space-x-8">
+        <li>
+          <a class="uppercase underline hover:text-green-200" [routerLink]="['resolve']"
+             routerLinkActive="text-green-200">Resolver
+            Example</a>
+        </li>
+        <li>
+          <a class="uppercase underline hover:text-green-200" [routerLink]="['reactive']"
+             routerLinkActive="text-green-200">Reactive
+            Example</a>
+        </li>
+      </ul>
     </div>
   </div>
+  <div class="relative top-0 w-full bg-gray-200 h-1">
+    <ng-container *ngIf="getProgress() | async as progress">
+      <div class="bg-red-600 h-1 transition-opacity duration-75" [class.opacity-0]="progress > 90"
+           [ngStyle]="{width: progress + '%'}"></div>
+    </ng-container>
+  </div>
+</div>

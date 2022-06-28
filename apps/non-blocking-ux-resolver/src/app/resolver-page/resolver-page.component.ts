@@ -1,7 +1,6 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
-import { Entity } from '../services/config.service';
-import { pluck } from 'rxjs';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'angular-cologne-resolver-page',
@@ -9,12 +8,12 @@ import { pluck } from 'rxjs';
   styleUrls: ['./resolver-page.component.scss'],
 })
 export class ResolverPageComponent {
-  cards: Entity[] = [];
+  cards: User[] = [];
   placeholderCards = new Array(15);
 
   constructor(private activatedRoute: ActivatedRoute) {
-    this.activatedRoute.data
-      .pipe(pluck('config'))
-      .subscribe((config) => (this.cards = config ?? null));
+    this.activatedRoute.data.subscribe(
+      ({ users }) => (this.cards = users ?? null)
+    );
   }
 }

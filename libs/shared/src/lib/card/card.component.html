@@ -1,13 +1,13 @@
-<div class="card drop-shadow-lg rounded-lg w-72 h-96 border-2 mx-auto bg-white">
-  <div class="flex flex-col items-center h-full space-x-5">
-    <div class="card__image flex h-full">
+<div class="card drop-shadow-lg rounded-lg w-72 h-96 border-2 mx-auto bg-white pb-4 overflow-hidden">
+  <div class="flex flex-col items-center h-full">
+    <div class="card__image flex aspect-[3/2]">
       <img [src]="imageUrl" [alt]="title" />
     </div>
-    <div class="card__body flex flex-col justify-space-between h-auto text-center">
+    <div class="card__body flex flex-col justify-space-between h-auto text-center px-4 pb-2">
       <h3 class="card__title flex flex-col justify-center align-center text-xl mt-4">
         {{ title }}
       </h3>
-      <div>{{content}}</div>
+      <p>{{ content }}</p>
     </div>
   </div>
 </div>

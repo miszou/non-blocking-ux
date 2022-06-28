@@ -4,25 +4,22 @@ import { Observable, catchError, finalize, map, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Params } from '@angular/router';
 import { TimerService } from '@angular-cologne/shared';
+import { User } from '../models/user.model';
 
 const API_URL = 'http://localhost:3000/api';
-export interface Entity {
-  [key: string]: string;
-}
-
 @Injectable({
   providedIn: 'root',
 })
-export class ConfigService {
+export class UserService {
   constructor(private http: HttpClient, private timerService: TimerService) {}
 
-  getPosts(params?: Params): Observable<Entity[]> {
+  getUsers(params?: Params): Observable<User[]> {
     this.timerService.reset();
     this.timerService.start();
     params = new HttpParams(params).append('limit', 15);
 
     return this.http
-      .get<{ users: Entity[] }>(`${API_URL}/users`, { params })
+      .get<{ users: User[] }>(`${API_URL}/users`, { params })
       .pipe(
         catchError((error) => throwError(() => error)),
         map((response) => response.users),
@@ -30,23 +27,13 @@ export class ConfigService {
       );
   }
 
-  getPostById(id: string): Observable<Entity> {
+  getUserById(id: string): Observable<User> {
     this.timerService.reset();
     this.timerService.start();
 
-    return this.http.get<Entity>(`${API_URL}/users/${id}`).pipe(
+    return this.http.get<User>(`${API_URL}/users/${id}`).pipe(
       catchError((error) => throwError(() => error)),
       finalize(() => this.timerService.pause())
     );
   }
-
-  private randomColor = () => {
-    let color = '';
-    for (let i = 0; i < 6; i++) {
-      const random = Math.random();
-      const bit = (random * 16) | 0;
-      color += bit.toString(16);
-    }
-    return color;
-  };
 }

@@ -1,24 +1,21 @@
 <angular-cologne-header></angular-cologne-header>
-<div class="flex flex-col min-h-full bg-slate-100 pt-24">
-  <div class="container h-auto mx-auto flex flex-col space-y-4">
-    <div class="flex justify-center space-x-1 bg-slate-300 py-2">
-      <label>Loading Time:</label>
-      <angular-cologne-stop-watch [config]="{ showReset: true }"></angular-cologne-stop-watch>
-    </div>
-    <div class="flex items-center text-white bg-slate-700 p-4">
-      <ul class="flex space-x-8 mx-auto">
-        <li>
-          <a class="uppercase underline hover:text-green-200" [routerLink]="['resolve']"
-             routerLinkActive="text-green-200">Resolver
-            Example</a>
-        </li>
-        <li>
-          <a class="uppercase underline hover:text-green-200" [routerLink]="['reactive']"
-             routerLinkActive="text-green-200">Reactive
-            Example</a>
-        </li>
-      </ul>
-    </div>
+<ng-container *ngIf="loading">
+  <div
+       class="absolute top-0 w-full h-full z-20 bg-gray-900 opacity-70 flex justify-center grow items-center pointer-events-none">
+    <div class="w-24 h-24 animate-spin"><img src="assets/loading-spinner.svg"></div>
+  </div>
+</ng-container>
+
+<div class="flex flex-col min-h-full bg-slate-100 pt-20 relative">
+  <div class="container grow h-auto mx-auto flex flex-col">
     <router-outlet></router-outlet>
+  </div>
+</div>
+
+<div
+     class="absolute h-12 bottom-2 right-2 z-50 flex justify-center items-center space-x-2 bg-slate-700 text-white rounded-md">
+  <div class="overflow-hidden flex transition-all duration-500 justify-center space-x-1 px-4">
+    <label>Loading Time:</label>
+    <angular-cologne-stop-watch [config]="{ showReset: true }"></angular-cologne-stop-watch>
   </div>
 </div>

@@ -1,7 +1,6 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
-import { Entity } from '../../services/config.service';
-import { pluck } from 'rxjs';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'angular-cologne-resolver-detail-page',
@@ -9,11 +8,9 @@ import { pluck } from 'rxjs';
   styleUrls: ['./detail-page.component.scss'],
 })
 export class ResolverDetailPageComponent {
-  item: Entity | null = null;
+  user: User | null = null;
 
   constructor(private activatedRoute: ActivatedRoute) {
-    this.activatedRoute.data
-      .pipe(pluck('item'))
-      .subscribe((item) => (this.item = item));
+    this.activatedRoute.data.subscribe(({ user }) => (this.user = user));
   }
 }

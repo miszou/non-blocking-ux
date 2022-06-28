@@ -1,25 +1,13 @@
 <div class="flex">
   <div class="px-2">{{ stopWatch$ | async | date: 'ss:SS' }} Seconds</div>
   <div>
-    <button
-      *ngIf="config.showStart"
-      class="bg-slate-200 rounded-sm px-4 py-1 uppercase text-sm"
-      (click)="start()"
-    >
+    <button *ngIf="config.showStart" class="bg-slate-400 text-slate-800 rounded-sm px-2 py-1 text-xs" (click)="start()">
       Start
     </button>
-    <button
-      *ngIf="config.showPause"
-      class="bg-slate-200 rounded-sm px-4 py-1 uppercase text-sm"
-      (click)="pause()"
-    >
+    <button *ngIf="config.showPause" class="bg-slate-400 text-slate-800 rounded-sm px-2 py-1 text-xs" (click)="pause()">
       Pause
     </button>
-    <button
-      *ngIf="config.showReset"
-      class="bg-slate-200 rounded-sm px-4 py-1 uppercase text-sm"
-      (click)="reset()"
-    >
+    <button *ngIf="config.showReset" class="bg-slate-400 text-slate-800 rounded-sm px-2 py-1 text-xs" (click)="reset()">
       Reset
     </button>
   </div>

@@ -6,9 +6,8 @@ import {
 } from '@angular/common/http';
 import { Observable, delay } from 'rxjs';
 
+import { GLOBAL_DELAY } from '@angular-cologne/shared';
 import { Injectable } from '@angular/core';
-
-const DELAY = 2000;
 
 @Injectable()
 export class DelayInterceptor implements HttpInterceptor {
@@ -16,6 +15,6 @@ export class DelayInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    return next.handle(req).pipe(delay(DELAY));
+    return next.handle(req).pipe(delay(GLOBAL_DELAY));
   }
 }

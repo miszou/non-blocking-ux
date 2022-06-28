@@ -10,8 +10,9 @@
   <div class="card-list">
     <ng-container *ngIf="cards$ | async as cards; else loadingTemplate">
       <ng-container *ngFor="let card of cards">
-        <a [routerLink]="['.', card['userId']]">
-          <angular-cologne-card [title]="card['firstname']+ card['lastname']" [content]="card['bio']">
+        <a [routerLink]="['.', card.userId]">
+          <angular-cologne-card [title]="card.firstname + ' ' + card.lastname" [content]="card.bio"
+                                [imageUrl]="card.imageUrl">
           </angular-cologne-card>
         </a>
       </ng-container>

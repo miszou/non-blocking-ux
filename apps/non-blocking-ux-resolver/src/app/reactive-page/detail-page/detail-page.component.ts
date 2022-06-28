@@ -1,8 +1,9 @@
-import { ConfigService, Entity } from '../../services/config.service';
 import { Observable, switchMap } from 'rxjs';
 
 import { ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
+import { User } from '../../models/user.model';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'angular-cologne-reactive-detail-page',
@@ -10,14 +11,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./detail-page.component.scss'],
 })
 export class ReactiveDetailPageComponent {
-  post$: Observable<Entity> | null = null;
+  user$: Observable<User> | null = null;
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private configService: ConfigService
+    private usersService: UserService
   ) {
-    this.post$ = this.activatedRoute.params.pipe(
-      switchMap(({ id }) => this.configService.getPostById(id))
+    this.user$ = this.activatedRoute.params.pipe(
+      switchMap(({ id }) => this.usersService.getUserById(id))
     );
   }
 }
