@@ -1,10 +1,13 @@
 <div class="container px-4 space-y-4">
   <h2 class="text-4xl">User Detail Page</h2>
 
-  <article class="border-2 border-slate-400 h-96 p-4">
-    <div class="flex flex-col space-y-8">
-      <h1 class="text-4xl capitalize">{{user?.firstname}} {{user?.lastname}}</h1>
-      <p class="">{{user?.bio}}</p>
+  <article class="border-2 border-slate-400 h-96 p-4 max-w-[75%]">
+    <div class="flex justify-between space-x-8 h-full">
+      <img class="h-[340px] aspect-[3/2]" [src]="user?.imageUrl">
+      <div class="flex flex-col space-y-8">
+        <h1 class="text-4xl capitalize">{{user?.firstname}} {{user?.lastname}}</h1>
+        <p class="">{{user?.bio}}</p>
+      </div>
     </div>
   </article>
 </div>

@@ -1,10 +1,20 @@
-<div class="card-list">
-  <ng-container *ngFor="let card of cards">
-    <a [routerLink]="[card.userId]">
-      <angular-cologne-card [title]="card.firstname + ' ' + card.lastname" [content]="card.bio"
-                            [imageUrl]="card.imageUrl">
-      </angular-cologne-card>
-    </a>
-  </ng-container>
-  <router-outlet></router-outlet>
+<div class="flex space-x-2">
+  <div class="filters border-2 w-1/6 px-4 py-4">
+    <ul class="space-y-2">
+      <li><a class="link" [routerLink]="['.']" [queryParams]="{category: 'music'}">Music</a></li>
+      <li><a class="link" [routerLink]="['.']" [queryParams]="{category: 'games'}">Games</a></li>
+      <li><a class="link" [routerLink]="['.']" [queryParams]="{category: 'technology'}">Technology</a></li>
+    </ul>
+  </div>
+
+  <div class="card-list">
+    <ng-container *ngFor="let card of cards">
+      <a [routerLink]="[card.userId]">
+        <angular-cologne-card [title]="card.firstname + ' ' + card.lastname" [content]="card.bio"
+                              [imageUrl]="card.imageUrl">
+        </angular-cologne-card>
+      </a>
+    </ng-container>
+    <router-outlet></router-outlet>
+  </div>
 </div>

@@ -8,6 +8,7 @@
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2020 browser module main",
     "start:resolver": "nx serve non-blocking-ux-resolver",
     "start:reactive": "nx serve non-blocking-ux-reactive",
+    "start:demo": "nx serve non-blocking-ux-resolver",
     "build": "nx build",
     "test": "nx test"
   },

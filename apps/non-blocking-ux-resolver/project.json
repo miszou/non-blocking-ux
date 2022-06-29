@@ -60,7 +60,8 @@
           "browserTarget": "non-blocking-ux-resolver:build:production"
         },
         "development": {
-          "browserTarget": "non-blocking-ux-resolver:build:development"
+          "browserTarget": "non-blocking-ux-resolver:build:development",
+          "proxyConfig": "apps/non-blocking-ux-resolver/proxy.config.json"
         }
       },
       "defaultConfiguration": "development"

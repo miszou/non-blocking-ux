@@ -6,7 +6,7 @@ import { Params } from '@angular/router';
 import { TimerService } from '@angular-cologne/shared';
 import { User } from '../models/user.model';
 
-const API_URL = 'http://localhost:3000/api';
+const API_URL = '/api';
 @Injectable({
   providedIn: 'root',
 })
